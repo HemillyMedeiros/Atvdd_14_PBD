@@ -13,3 +13,12 @@
     BEGIN
         -- Impede a exclusão de qualquer pessoa
         RAISE EXCEPTION 'Não é permitido remover pessoas da tabela tb_pessoa';
+
+       -- Define a coluna "ativo" como FALSE para as linhas envolvidas
+        UPDATE tb_pessoa
+        SET ativo = FALSE
+        WHERE id = OLD.id;
+
+        RETURN OLD;
+    END;
+    $$ LANGUAGE plpgsql;
