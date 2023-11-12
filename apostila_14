@@ -3,3 +3,13 @@
 
     ALTER TABLE tb_pessoa
     ADD COLUMN ativo BOOLEAN DEFAULT true;
+
+--2.Associe um trigger de DELETE à tabela. Quando um DELETE for executado, o trigger deve atribuir FALSE à coluna ativo das linhas envolvidas. 
+--Além disso, o trigger não deve permitir que nenhuma pessoa seja removida.
+
+    CREATE OR REPLACE FUNCTION tg_delete_tb_pessoa()
+    RETURNS TRIGGER
+    AS $$
+    BEGIN
+        -- Impede a exclusão de qualquer pessoa
+        RAISE EXCEPTION 'Não é permitido remover pessoas da tabela tb_pessoa';
