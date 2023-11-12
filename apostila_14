@@ -22,3 +22,7 @@
         RETURN OLD;
     END;
     $$ LANGUAGE plpgsql;
+CREATE TRIGGER tr_delete_tb_pessoa
+BEFORE DELETE ON tb_pessoa
+FOR EACH ROW
+EXECUTE FUNCTION tg_delete_tb_pessoa();
